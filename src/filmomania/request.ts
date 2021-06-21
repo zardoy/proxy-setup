@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, CancelToken } from "axios";
+import pAny from "p-any";
 
 type SuccessProxyCallback = (proxyIp: string) => unknown;
 
@@ -18,12 +19,13 @@ export const requestSiteWithProxy = async (site: string, proxyIp: string, cancel
 };
 
 /**
+ * @throws
  * 
  * @param proxies Should be controlled by number of companions
  */
 export const requestSiteWithProxies = async (proxies: string[], site: string, timeout = 4000, proxySuccessCallback?: SuccessProxyCallback): Promise<AxiosResponse> => {
     const cancelSource = axios.CancelToken.source();
-    const successfulRequest = await Promise.race<AxiosResponse>(
+    const successfulRequest = await pAny<AxiosResponse>(
         [
             ...proxies.map(proxyIp =>
                 requestSiteWithProxy(site, proxyIp, cancelSource.token, proxySuccessCallback)
