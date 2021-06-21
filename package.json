@@ -1,0 +1,33 @@
+{
+  "name": "@zardoy/proxy-util",
+  "version": "0.0.1",
+  "repository": "https://github.com/zardoy/proxy-setup.git",
+  "author": "Vitaly Turovsky <vital2580@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prepublishOnly": "tsc && node scripts/prepare-package-json.mjs"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
+    "debug": "^4.3.1",
+    "got": "^11.8.2",
+    "is-online": "^9.0.1",
+    "jsonfile": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/jsonfile": "^6.0.0",
+    "systeminformation": "^5.7.7",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.170",
+    "@types/react": "^17.0.11",
+    "@zardoy/tsconfig": "^1.1.0",
+    "ink": "^3.0.8",
+    "ink-spinner": "^4.0.2",
+    "lodash": "^4.17.21",
+    "modify-json-file": "^1.0.1",
+    "osx-temperature-sensor": "^1.0.7",
+    "react": "^17.0.2"
+  }
+}
