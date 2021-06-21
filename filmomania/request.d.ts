@@ -3,6 +3,7 @@ declare type SuccessProxyCallback = (proxyIp: string) => unknown;
 /** Basic function */
 export declare const requestSiteWithProxy: (site: string, proxyIp: string, cancelToken: CancelToken, proxySuccessCallback?: SuccessProxyCallback | undefined) => Promise<AxiosResponse>;
 /**
+ * @throws
  *
  * @param proxies Should be controlled by number of companions
  */

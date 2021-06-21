@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestSiteWithProxies = exports.requestSiteWithProxy = void 0;
 const axios_1 = __importDefault(require("axios"));
+const p_any_1 = __importDefault(require("p-any"));
 /** Basic function */
 const requestSiteWithProxy = async (site, proxyIp, cancelToken, proxySuccessCallback) => {
     const proxyParts = proxyIp.split(":");
@@ -20,12 +21,13 @@ const requestSiteWithProxy = async (site, proxyIp, cancelToken, proxySuccessCall
 };
 exports.requestSiteWithProxy = requestSiteWithProxy;
 /**
+ * @throws
  *
  * @param proxies Should be controlled by number of companions
  */
 const requestSiteWithProxies = async (proxies, site, timeout = 4000, proxySuccessCallback) => {
     const cancelSource = axios_1.default.CancelToken.source();
-    const successfulRequest = await Promise.race([
+    const successfulRequest = await p_any_1.default([
         ...proxies.map(proxyIp => exports.requestSiteWithProxy(site, proxyIp, cancelSource.token, proxySuccessCallback)),
         new Promise((_, reject) => setTimeout(() => reject("timeout"), timeout))
     ]).finally(() => cancelSource.cancel());
